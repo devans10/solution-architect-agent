@@ -27,9 +27,12 @@ create table if not exists platforms (
 );
 
 -- Index for vector similarity search
+-- NOTE: Create this index AFTER seeding data (run seed_catalog.py first).
+-- lists must be <= number of rows; for the 25-platform demo catalog use lists=5.
+-- For larger catalogs scale lists to ~sqrt(row_count).
 create index if not exists platforms_embedding_idx
     on platforms using ivfflat (embedding vector_cosine_ops)
-    with (lists = 50);
+    with (lists = 5);
 
 -- Index for category filtering
 create index if not exists platforms_category_idx on platforms (category);
