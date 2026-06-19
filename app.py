@@ -86,11 +86,12 @@ def render_mermaid(diagram_code: str):
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script>
       mermaid.initialize({{
-        startOnLoad: true,
+        startOnLoad: false,
         theme: 'default',
         flowchart: {{ useMaxWidth: true, htmlLabels: true }},
         securityLevel: 'loose'
       }});
+      mermaid.run({{ querySelector: '.mermaid' }});
     </script>
     """
     st.components.v1.html(html, height=600, scrolling=True)
